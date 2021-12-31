@@ -3,7 +3,8 @@ import styles from './style.module.scss';
 import data from '../data/data.json';
 import Comments from "../containers/Comments";
 
-export default function Home() {
+export default function Home({ comments }) {
+
   return (
       <>
         <Head>
@@ -57,11 +58,27 @@ export default function Home() {
 
         <main>
           <section className={styles.container}>
-            <Comments comments={data.comments}
+            <Comments comments={comments}
                       currentUser={data.currentUser}
             />
           </section>
         </main>
       </>
   );
-}
+};
+
+export const getServerSideProps = async (context) => {
+  const {comments} = data;
+
+  if (!data) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return {
+    props: {
+      comments,
+    },
+  }
+};

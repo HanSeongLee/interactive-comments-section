@@ -6,14 +6,20 @@ import DeleteIcon from '/public/icons/icon-delete.svg';
 import EditIcon from '/public/icons/icon-edit.svg';
 import Avatar from "../Avatar";
 import CommentForm from "../CommentForm";
+import {useDispatch} from "react-redux";
+import {open} from "../../store/modules/deleteCommentModal";
 
 const Comment = ({
                      id, user, createdAt, content,
                      score, replyingTo, me, currentUser,
-                     openDeleteComment
                  }) => {
+    const dispatch = useDispatch();
     const [openReplyForm, setOpenReplyForm] = useState(false);
     const [openEditForm, setOpenEditForm] = useState(false);
+
+    const openDeleteComment = () => {
+        dispatch(open({ id }));
+    };
 
     return (
         <>
