@@ -1,3 +1,23 @@
 @import '~include-media/dist/include-media';
 
 $breakpoints: (mobile: 568px, tablet: 768px, desktop: 992px);
+
+@mixin roundButton($background, $hover-background) {
+  border: 0;
+  background: $background;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+
+  @include media(">desktop") {
+    transition: background 0.3s;
+
+    &:hover {
+      background: $hover-background;
+    }
+  }
+}

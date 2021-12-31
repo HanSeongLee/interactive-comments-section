@@ -1,0 +1,154 @@
+@import "styles/utils";
+
+.commentBox {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "content content content"
+    "counterContainer . buttonContainer";
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 16px;
+  grid-gap: 16px;
+
+  @include media(">desktop") {
+    display: grid;
+    grid-template-columns: max(40px) auto auto;
+    grid-template-areas:
+    "counterContainer header buttonContainer"
+    "counterContainer content content";
+    grid-gap: 16px 24px;
+    padding: 24px;
+  }
+
+  .counterContainer {
+    grid-area: counterContainer;
+    display: flex;
+    align-items: center;
+
+    @include media(">desktop") {
+      align-items: flex-start;
+    }
+  }
+
+  .buttonContainer {
+    grid-area: buttonContainer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    @include media(">desktop") {
+      justify-content: flex-end;
+    }
+
+    button {
+      margin-right: 16px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .header {
+    grid-area: header / header / auto;
+    display: grid;
+    grid-template-areas:
+    "leftSide buttonContainer";
+
+    .leftSide {
+      grid-area: leftSide;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-right: 16px;
+    }
+
+    .username {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      color: #334253;
+    }
+
+    .label {
+      background: #5357B6;
+      border-radius: 2px;
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 15px;
+      color: #FFFFFF;
+      padding: 3px 6px;
+      margin-left: 8px;
+    }
+
+    .createdAt {
+      font-size: 16px;
+      line-height: 24px;
+      color: #67727E;
+      margin-left: 16px;
+    }
+  }
+
+  .content {
+    grid-area: content;
+    font-size: 16px;
+    line-height: 24px;
+    color: #67727E;
+
+    .replyingTo {
+      font-weight: 500;
+      color: #5357B6;
+    }
+  }
+
+  @mixin button($color, $hover-color) {
+    background: transparent;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: $color;
+
+    .icon {
+      margin-right: 8px;
+
+      path {
+        fill: $color;
+      }
+    }
+
+    @include media(">desktop") {
+      transition: color 0.3s;
+
+      .icon path {
+        transition: fill 0.3s;
+      }
+
+      &:hover {
+        color: $hover-color;
+
+        .icon path {
+          fill: $hover-color;
+        }
+      }
+    }
+  }
+
+  .primaryButton {
+    @include button(#5357B6, #C5C6EF);
+  }
+
+  .dangerousButton {
+    @include button(#ED6368, #FFB8BB);
+  }
+}

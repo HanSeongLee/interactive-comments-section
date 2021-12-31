@@ -1,0 +1,19 @@
+@import "styles/utils";
+
+.container {
+  display: grid;
+  grid-gap: 16px;
+  max-width: 730px;
+
+  .replyContainer {
+    display: grid;
+    grid-gap: 16px;
+    padding-left: 16px;
+    border-left: 2px solid #E9EBF0;
+
+    @include media(">desktop") {
+      margin-left: 43px;
+      padding-left: 43px;
+    }
+  }
+}

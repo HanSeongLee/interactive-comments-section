@@ -1,0 +1,51 @@
+@import "styles/utils";
+
+.counterContainer {
+  display: flex;
+  align-items: center;
+  background: #F5F6FA;
+  border-radius: 10px;
+  padding: 10px 12px;
+  max-width: 100px;
+  height: 100%;
+
+  @include media(">desktop") {
+    padding: 12px 10px;
+    max-width: 40px;
+    max-height: 100px;
+    flex-direction: column;
+  }
+
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+
+    .icon path {
+      transition: fill 0.3s;
+    }
+
+    &:hover {
+      .icon path {
+        fill: #5357B6;
+      }
+    }
+  }
+
+  .counterInput {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #5357B6;
+    min-width: 0;
+  }
+}
