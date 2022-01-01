@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import styles from './style.module.scss';
 import Counter from "../Counter";
 import ReplyIcon from '/public/icons/icon-reply.svg';
@@ -9,6 +9,8 @@ import CommentForm from "../CommentForm";
 import {useDispatch} from "react-redux";
 import {open} from "../../store/modules/deleteCommentModal";
 import moment from 'moment';
+import axios from "axios";
+import {mutate} from "swr";
 
 moment.updateLocale('en', {
     relativeTime : {
@@ -48,6 +50,29 @@ const Comment = ({
         dispatch(open({ id }));
     };
 
+    const onPlusClick = useCallback(async () => {
+        await axios.post(`/api/comments/${id}/upvote`, {
+        });
+
+        await mutate('/api/comments');
+    }, [id, score]);
+
+    const onMinusClick = useCallback(async () => {
+        await axios.post(`/api/comments/${id}/downvote`, {
+        });
+
+        await mutate('/api/comments');
+    }, [id, score]);
+
+    const onEdit = useCallback(async (comment) => {
+        await axios.patch(`/api/comments/${id}`, {
+            content: comment,
+        });
+
+        await mutate('/api/comments');
+        setOpenEditForm(false);
+    }, [id]);
+
     return (
         <>
             <article className={styles.commentBox}
@@ -78,6 +103,8 @@ const Comment = ({
                             <CommentForm defaultValue={content}
                                          submitButtonText={'edit'}
                                          edit
+                                         onSubmit={onEdit}
+                                         replyingTo={replyingTo?.username}
                             />
                         </p>
                     ) : (
@@ -89,7 +116,10 @@ const Comment = ({
                     )}
                 </div>
                 <div className={styles.counterContainer}>
-                    <Counter value={score}/>
+                    <Counter value={score}
+                             onPlusClick={onPlusClick}
+                             onMinusClick={onMinusClick}
+                    />
                 </div>
                 <div className={styles.buttonContainer}>
                     {me ? (

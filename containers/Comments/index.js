@@ -1,10 +1,23 @@
-import React from "react";
+import React, {useCallback} from "react";
 import styles from './style.module.scss';
 import Comment from "../../components/Comment";
 import CommentForm from "../../components/CommentForm";
 import DeleteCommentModalContainer from "../DeleteCommentModalContainer";
+import useRequest from "../../lib/useRequest";
+import axios from "axios";
+import {mutate} from "swr";
 
-const Comments = ({ comments, currentUser }) => {
+const Comments = ({ currentUser }) => {
+    const { data: comments } = useRequest('/api/comments');
+
+    const onSubmit = useCallback(async (comment) => {
+        await axios.post(`/api/comments`, {
+            content: comment,
+        });
+
+        await mutate('/api/comments');
+    }, []);
+
     return (
         <div className={styles.container}>
             {comments?.map((comment) => (
@@ -25,8 +38,10 @@ const Comments = ({ comments, currentUser }) => {
                     )}
                 </>
             ))}
-            <CommentForm currentUser={currentUser} />
-            <DeleteCommentModalContainer />
+            <CommentForm currentUser={currentUser}
+                         onSubmit={onSubmit}
+            />
+            <DeleteCommentModalContainer/>
         </div>
     );
 };

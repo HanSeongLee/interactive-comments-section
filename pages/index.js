@@ -3,12 +3,12 @@ import styles from './style.module.scss';
 import data from '../data/data.json';
 import Comments from "../containers/Comments";
 import {findAll} from "../api/comments";
-import {useEffect} from "react";
+import {SWRConfig} from "swr";
 
-export default function Home({ comments }) {
+export default function Home({ fallback }) {
 
   return (
-      <>
+      <SWRConfig value={{ fallback }}>
         <Head>
           <meta charSet="UTF-8"/>
           <meta name="viewport"
@@ -60,12 +60,10 @@ export default function Home({ comments }) {
 
         <main>
           <section className={styles.container}>
-            <Comments comments={comments}
-                      currentUser={data.currentUser}
-            />
+            <Comments currentUser={data.currentUser} />
           </section>
         </main>
-      </>
+      </SWRConfig>
   );
 };
 
@@ -80,7 +78,9 @@ export const getServerSideProps = async (context) => {
 
   return {
     props: {
-      comments,
+      fallback: {
+        '/api/comments': comments
+      },
     },
   }
 };

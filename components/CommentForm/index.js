@@ -5,7 +5,7 @@ import cn from 'classnames';
 
 const CommentForm = ({
                          key, currentUser, replyingTo, submitButtonText = 'send',
-                         defaultValue='', edit,
+                         defaultValue='', edit, onSubmit
                      }) => {
     const [comment, setComment] = useState(defaultValue);
 
@@ -19,6 +19,11 @@ const CommentForm = ({
             [styles.editForm]: edit,
         })}
               key={key}
+              onSubmit={(e) => {
+                  e.preventDefault();
+                  onSubmit(comment);
+                  setComment('');
+              }}
         >
             <textarea className={styles.commentTextArea}
                       placeholder={'Add a comment...'}

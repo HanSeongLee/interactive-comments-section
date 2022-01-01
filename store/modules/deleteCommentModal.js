@@ -8,8 +8,8 @@ const slice = createSlice({
     name: 'deleteCommentModal',
     initialState,
     reducers: {
-        open: (state) => {
-            state.id = state.id;
+        open: (state, action) => {
+            state.id = action.payload.id;
             state.open = true;
         },
         close: (state) => {

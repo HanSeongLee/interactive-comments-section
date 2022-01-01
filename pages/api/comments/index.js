@@ -1,16 +1,27 @@
-import {findAll} from "../../../api/comments";
+import {create, findAll} from "../../../api/comments";
 
-export default async function handle(req, res) {
+export default async function handler(req, res) {
     if (req.method === 'GET') {
-        handleGET(res);
-    } else {
-        throw new Error(
-            `The HTTP ${req.method} method is not supported at this route.`
-        );
+        return await handleGET(req, res);
+    } else if (req.method === 'POST') {
+        return await handlePOST(req, res);
     }
+    throw new Error(
+        `The HTTP ${req.method} method is not supported at this route.`
+    );
 };
 
-async function handleGET(res) {
+async function handleGET(req, res) {
     const comments = await findAll();
     res.json(comments);
+}
+
+async function handlePOST(req, res) {
+    const { content } = req.body;
+
+    const comment = await create({
+        userId: 4,
+        content,
+    });
+    res.json(comment);
 }

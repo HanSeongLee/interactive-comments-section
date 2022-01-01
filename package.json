@@ -10,6 +10,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@svgr/webpack": "^6.1.2",
+    "axios": "^0.24.0",
     "babel-plugin-superjson-next": "^0.4.2",
     "classnames": "^2.3.1",
     "i": "^0.3.7",
@@ -22,7 +23,8 @@
     "react-dom": "17.0.2",
     "react-redux": "^7.2.6",
     "sass": "^1.45.1",
-    "superjson": "^1.8.0"
+    "superjson": "^1.8.0",
+    "swr": "^1.1.2"
   },
   "devDependencies": {
     "@prisma/client": "^3.7.0",
