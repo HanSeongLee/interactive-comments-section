@@ -8,6 +8,33 @@ import Avatar from "../Avatar";
 import CommentForm from "../CommentForm";
 import {useDispatch} from "react-redux";
 import {open} from "../../store/modules/deleteCommentModal";
+import moment from 'moment';
+
+moment.updateLocale('en', {
+    relativeTime : {
+        future: 'in %s',
+        past:   '%s ago',
+        s:      'a few seconds',
+        m:      'a minute',
+        mm:     '%d minutes',
+        h:      'an hour',
+        hh:     '%d hours',
+        d:      'a day',
+        dd:     function(number) {
+            if (number < 7) {
+                return number + ' days'; // Moment uses "d" when it's just 1 day.
+            }
+            else {
+                const weeks = Math.round(number / 7);
+                return weeks + ' ' + (weeks > 1 ? 'weeks' : 'week');
+            }
+        },
+        M:      '1 month',
+        MM:     '%d months',
+        y:      'a year',
+        yy:     '%d years'
+    }
+});
 
 const Comment = ({
                      id, user, createdAt, content,
@@ -41,7 +68,7 @@ const Comment = ({
                         </span>
                         )}
                         <span className={styles.createdAt}>
-                            {createdAt.toString()}
+                            {moment(createdAt).startOf('hour').fromNow()}
                         </span>
                     </div>
                 </div>

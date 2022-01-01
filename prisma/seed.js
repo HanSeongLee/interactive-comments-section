@@ -1,6 +1,14 @@
 const { PrismaClient } = require('@prisma/client')
+const moment = require('moment');
 
 const prisma = new PrismaClient()
+
+const now = moment().toDate();
+
+const monthAgo = new Date(moment().toDate().setMonth(now.getMonth() - 1));
+const twoWeeksAgo = new Date(moment().toDate().setDate(now.getDate() - 14));
+const oneWeekAgo = new Date(moment().toDate().setDate(now.getDate() - 7));
+const twoDaysAgo = new Date(moment().toDate().setDate(now.getDate() - 2));
 
 const userData = [
     {
@@ -16,6 +24,7 @@ const userData = [
                 {
                     "content": "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
                     "score": 12,
+                    createdAt: monthAgo,
                 },
             ]
         }
@@ -33,6 +42,7 @@ const userData = [
                 {
                     "content": "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
                     "score": 5,
+                    createdAt: twoWeeksAgo,
                 },
             ]
         }
@@ -52,6 +62,7 @@ const userData = [
                     "score": 4,
                     parentCommentId: 2,
                     replyingToId: 2,
+                    createdAt: oneWeekAgo,
                 }
             ]
         }
@@ -71,6 +82,7 @@ const userData = [
                     "score": 2,
                     parentCommentId: 2,
                     replyingToId: 3,
+                    createdAt: twoDaysAgo,
                 }
             ]
         }
