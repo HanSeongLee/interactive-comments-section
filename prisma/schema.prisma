@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id            Int         @id @default(autoincrement())
+  username      String      @unique
+  image         AvatarImage @relation(fields: [avatarImageId], references: [id])
+  comments      Comment[]   @relation("user")
+  replyingTos   Comment[]   @relation("replyingTo")
+  avatarImageId Int
+}
+
+model AvatarImage {
+  id   Int    @id @default(autoincrement())
+  png  String
+  webp String
+  User User[]
+}
+
+model Comment {
+  id              Int       @id @default(autoincrement())
+  content         String
+  score           Int       @default(0)
+  replyingTo      User?     @relation("replyingTo", fields: [replyingToId], references: [id])
+  replyingToId    Int?
+  user            User      @relation("user", fields: [userId], references: [id])
+  userId          Int
+  parentCommentId Int?
+  parentComment   Comment?  @relation("CommentReplies", fields: [parentCommentId], references: [id])
+  replies         Comment[] @relation("CommentReplies")
+  createdAt       DateTime  @default(now())
+}

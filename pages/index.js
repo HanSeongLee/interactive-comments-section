@@ -2,6 +2,8 @@ import Head from 'next/head';
 import styles from './style.module.scss';
 import data from '../data/data.json';
 import Comments from "../containers/Comments";
+import {findAll} from "../api/comments";
+import {useEffect} from "react";
 
 export default function Home({ comments }) {
 
@@ -68,9 +70,9 @@ export default function Home({ comments }) {
 };
 
 export const getServerSideProps = async (context) => {
-  const {comments} = data;
+  const comments = await findAll();
 
-  if (!data) {
+  if (!comments) {
     return {
       notFound: true,
     }

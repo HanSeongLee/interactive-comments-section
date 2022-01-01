@@ -41,7 +41,7 @@ const Comment = ({
                         </span>
                         )}
                         <span className={styles.createdAt}>
-                            {createdAt}
+                            {createdAt.toString()}
                         </span>
                     </div>
                 </div>
@@ -56,7 +56,7 @@ const Comment = ({
                     ) : (
                         <p>
                             {replyingTo && (
-                                <span className={styles.replyingTo}>@{replyingTo}</span>
+                                <span className={styles.replyingTo}>@{replyingTo.username}</span>
                             )} {content}
                         </p>
                     )}
