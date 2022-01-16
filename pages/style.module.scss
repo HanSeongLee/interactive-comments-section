@@ -1,5 +1,10 @@
 @import "styles/utils";
 
+.hidden {
+  position: absolute;
+  top: -9999px;
+}
+
 .container {
   display: flex;
   align-items: center;

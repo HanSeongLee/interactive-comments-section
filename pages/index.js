@@ -59,6 +59,9 @@ export default function Home({ fallback }) {
         </Head>
 
         <main>
+          <h1 className={styles.hidden}>
+            Interactive Comments Section
+          </h1>
           <section className={styles.container}>
             <Comments currentUser={data.currentUser} />
           </section>

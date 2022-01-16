@@ -84,13 +84,13 @@ const Comment = ({
                                 alt={user?.username}
                                 {...user?.image}
                         />
-                        <span className={styles.username}>
-                        {user?.username}
-                    </span>
+                        <h2 className={styles.username}>
+                            {user?.username}
+                        </h2>
                         {me && (
                             <span className={styles.label}>
-                            you
-                        </span>
+                                you
+                            </span>
                         )}
                         <span className={styles.createdAt}>
                             {moment(createdAt).startOf('hour').fromNow()}

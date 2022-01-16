@@ -8,16 +8,16 @@ const Counter = ({ value, onPlusClick, onMinusClick }) => {
         <div className={styles.counterContainer}>
             <button className={styles.button}
                     onClick={onPlusClick}
+                    aria-label={'plus'}
             >
                 <PlusIcon className={styles.icon} />
             </button>
-            <input className={styles.counterInput}
-                   type={'number'}
-                   defaultValue={value}
-                   disabled
-            />
+            <span className={styles.counterInput}>
+                {value}
+            </span>
             <button className={styles.button}
                     onClick={onMinusClick}
+                    aria-label={'minus'}
             >
                 <MinusIcon className={styles.icon} />
             </button>
