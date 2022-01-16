@@ -62,9 +62,9 @@ export default function Home({ fallback }) {
           <h1 className={styles.hidden}>
             Interactive Comments Section
           </h1>
-          <section className={styles.container}>
+          <div className={styles.container}>
             <Comments currentUser={data.currentUser} />
-          </section>
+          </div>
         </main>
       </SWRConfig>
   );
