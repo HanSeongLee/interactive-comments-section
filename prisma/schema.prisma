@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -28,7 +28,7 @@ model AvatarImage {
 
 model Comment {
   id              Int       @id @default(autoincrement())
-  content         String
+  content         String    @db.Text
   score           Int       @default(0)
   replyingTo      User?     @relation("replyingTo", fields: [replyingToId], references: [id])
   replyingToId    Int?
