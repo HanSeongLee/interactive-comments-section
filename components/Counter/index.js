@@ -13,7 +13,8 @@ const Counter = ({ value, onPlusClick, onMinusClick }) => {
             </button>
             <input className={styles.counterInput}
                    type={'number'}
-                   value={value}
+                   defaultValue={value}
+                   disabled
             />
             <button className={styles.button}
                     onClick={onMinusClick}

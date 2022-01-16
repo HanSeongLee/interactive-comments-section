@@ -46,6 +46,14 @@
     line-height: 19px;
     text-align: center;
     color: #5357B6;
+    width: 100%;
     min-width: 0;
+    outline: none;
+
+    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
   }
 }
